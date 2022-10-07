@@ -8,6 +8,7 @@
   --shadow-color: #000000;
   --hero-footer-bg-color: #2f303a;
   --slave-text-color: #fff;
+  --bezier-effect: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 img {
@@ -122,6 +123,8 @@ button {
   line-height: 1.14;
   letter-spacing: 0.02em;
   color: var(--main-text-color);
+
+  transition: color var(--bezier-effect);
 }
 
 .navigation-link::after {
@@ -131,15 +134,16 @@ button {
   bottom: 0;
   width: 100%;
   height: 4px;
-  background: #2196f3;
+  /* background: #2196f3; */
   border-radius: 2px;
   transform: scaleX(0);
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--bezier-effect), background var(--bezier-effect);
 }
 
 .navigation-link:hover::after,
 .navigation-link:focus::after {
   transform: scaleX(1);
+  background: #2196f3;
 }
 
 .navigation-link.current::after {
@@ -164,6 +168,7 @@ button {
 .contacts-link:focus {
   color: var(--accent-color);
 }
+
 .icon-mail {
   width: 16px;
   height: 12px;
@@ -183,11 +188,14 @@ button {
   letter-spacing: 0.02em;
   color: var(--second-text-color);
   display: flex;
-  align-items: center;
+  align-items: baseline;
+  transition: color var(--bezier-effect);
 }
+
 .header-contacts {
   margin-left: auto;
   display: flex;
+  align-items: baseline;
 }
 
 .header-contacts a + a {
@@ -375,15 +383,19 @@ button {
   width: 44px;
   height: 44px;
 }
-.team-soc-item a {
+
+.team-soc-link {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  background-color: #fff;
   color: #afb1b8;
+  transition: color var(--bezier-effect), background-color var(--bezier-effect);
 }
+
 .team-soc-icon {
   width: 20px;
   height: 20px;
@@ -427,6 +439,7 @@ button {
   color: #afb1b8;
   border: 1px solid #afb1b8;
   border-radius: 4px;
+  transition: color var(--bezier-effect);
 }
 
 .clients-icon {
@@ -464,6 +477,7 @@ button {
 
 .footer-contacts {
   color: #ffffffa7;
+  transition: color var(--bezier-effect);
 }
 
 .footer-contacts:hover,
@@ -481,6 +495,7 @@ button {
 
 .footer-address-link {
   color: var(--slave-text-color);
+  transition: color var(--bezier-effect);
 }
 
 .footer-address-list li + li {
@@ -506,7 +521,6 @@ button {
 .footer-soc-item {
   width: 44px;
   height: 44px;
-  background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
 }
 
@@ -514,6 +528,7 @@ button {
 .footer-soc-link:focus {
   background-color: var(--accent-color);
 }
+
 .footer-soc-icon {
   width: 20px;
   height: 20px;
@@ -527,6 +542,8 @@ button {
   height: 100%;
   color: #fff;
   border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color var(--bezier-effect);
 }
 /* -----------------------PORTFOLIO-------------------------------- */
 
@@ -540,8 +557,8 @@ button {
 }
 
 .filter-button {
-  min-height: 38px;
   font-family: inherit;
+  letter-spacing: 0.03em;
   color: var(--main-text-color);
   background-color: #f5f4fa;
   border-radius: 4px;
@@ -549,6 +566,8 @@ button {
   font-size: 16px;
   line-height: 1.62;
   padding: 6px 22px;
+  transition: color var(--bezier-effect), background-color var(--bezier-effect),
+    box-shadow var(--bezier-effect);
 }
 
 .filter-button.all {
@@ -561,7 +580,6 @@ button {
   color: var(--slave-text-color);
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
 }
 
 .works {
@@ -623,6 +641,7 @@ button {
   display: block;
   border: 1px solid #eeeeee;
   color: var(--main-text-color);
+  transition: box-shadow var(--bezier-effect);
 }
 
 .portfolio-link:hover,
@@ -642,52 +661,78 @@ button {
   height: 100%;
 
   background: rgba(62, 58, 58, 0.8);
-  /* visibility: visible; */
   opacity: 1;
-  transition: opacity 300ms linear;
+  transition: opacity var(--bezier-effect), visibility var(--bezier-effect);
 }
 
 .modal {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
 
   display: flex;
   justify-content: end;
-  min-width: 500px;
-  min-height: 500px;
+  width: 582px;
+  height: 525px;
   background: #ffffff;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
+  transition: transform var(--bezier-effect), opacity var(--bezier-effect),
+    scale var(--bezier-effect);
+
+  animation-name: anime-modal;
+  animation-duration: 1500ms;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+
+  box-shadow: 10px 14px 14px #00000040; /*авторська тінь =)*/
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(50%, -50%) scale(0);
+}
+
+@keyframes anime-modal {
+  0% {
+    rotate: (0deg);
+  }
+  50% {
+    rotate: (200deg);
+  }
+  100% {
+    rotate: 360deg;
+  }
 }
 
 .is-hidden {
-  /* visibility: hidden; */
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
 }
 
-.cross-img {
-  width: 18px;
-  height: 18px;
-  margin-top: 8px;
-  margin-right: 8px;
-
+.cross-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid #0000001a;
   border-radius: 50%;
+  background-color: transparent;
+  transition: color var(--bezier-effect);
 }
-.cross-img:hover {
+
+.cross-btn:hover {
   color: #188ce8;
   cursor: pointer;
 }
 
 .modal-close-cross {
-  width: 11px;
-  height: 11px;
+  width: 18px;
+  height: 18px;
   fill: currentColor;
 }
